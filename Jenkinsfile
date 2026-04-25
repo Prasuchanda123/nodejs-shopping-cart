@@ -58,7 +58,8 @@ pipeline {
                 withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
                     sh '''
                     npm install -g snyk
-                    snyk --version 
+                    snyk --version
+                    snyk auth $SNYK_TOKEN
                     snyk test --severity-threshold=high || true
                     snyk monitor || true
                     '''
@@ -84,11 +85,17 @@ pipeline {
             }
         }
 
-        stage('Login to ACR') {
+        stage('Login to Azure & ACR') {
             steps {
-                sh '''
-                az acr login --name $ACR_NAME
-                '''
+                withCredentials([
+                    usernamePassword(credentialsId: 'azure-sp', usernameVariable: 'AZURE_APP_ID', passwordVariable: 'AZURE_PASSWORD'),
+                    string(credentialsId: 'azure-tenant', variable: 'AZURE_TENANT')
+                ]) {
+                    sh '''
+                    az login --service-principal -u $AZURE_APP_ID -p $AZURE_PASSWORD --tenant $AZURE_TENANT
+                    az acr login --name $ACR_NAME
+                    '''
+                }
             }
         }
 
