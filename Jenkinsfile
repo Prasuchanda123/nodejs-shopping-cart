@@ -30,6 +30,8 @@ pipeline {
 
         stage('SonarQube SAST Scan') {
                 steps {
+                    script {
+                        def scannerHome = tool 'sonar-scanner'
                     withSonarQubeEnv('SonarQube') {
                         sh '''
                         sonar-scanner \
@@ -42,6 +44,7 @@ pipeline {
                     }
                 }
             }
+        }
 
         stage('Quality Gate') {
             steps {
