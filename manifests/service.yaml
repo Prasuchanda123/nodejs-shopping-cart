@@ -1,0 +1,16 @@
+#This is a Kubernetes Service manifest for a Node.js application.
+#It defines a service of type LoadBalancer that exposes the Node.js application running in the pods created by the Deployment.
+#The service listens on port 80 and forwards traffic to the target port 3000 of the application pods.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs-app-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: nodejs-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
