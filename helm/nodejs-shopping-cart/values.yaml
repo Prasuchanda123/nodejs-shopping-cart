@@ -1,7 +1,7 @@
 replicaCount: 2
 
 image:
-  repository: luckyregistry11.azurecr.io/nodejs-shpping-cart
+  repository: luckyregistry11.azurecr.io/nodejs-shopping-cart
   tag: latest
   pullPolicy: Always
 
