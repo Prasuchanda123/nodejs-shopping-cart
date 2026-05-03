@@ -1,5 +1,5 @@
 apiVersion: v2
-name: nodejs-shopping-cart
+name: nodejs-shopping-cart1
 description: Helm chart for Node.js Shopping Cart application on AKS
 type: application
 version: 1.0.0
