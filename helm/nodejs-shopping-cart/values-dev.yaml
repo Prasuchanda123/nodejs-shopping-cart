@@ -1,10 +1,10 @@
-
-
+# Default Values for nodejs-shopping-cart.
+# This is a YAML-formated file. Declare variables to be passed into your templates.s
 replicaCount: 2
 
 image:
   repository: myacrrepo309.azurecr.io/nodejs-shopping-cart1
-  tag: latest
+  tag: 6
   pullPolicy: Always
 
 containerPort: 3000
